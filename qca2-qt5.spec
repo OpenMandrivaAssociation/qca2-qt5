@@ -93,7 +93,7 @@ utilize the Qt Cryptographic Architecture (QCA).
 #------------------------------------------------------------------------------
 
 %package plugin-gcrypt
-Summary:	Logger plugin for QCA
+Summary:	Gcrypt plugin for QCA
 Group:		Development/KDE and Qt
 Provides:	qca2-qt5-plugin-gcrypt-%{_lib} = %{EVRD}
 
@@ -135,7 +135,7 @@ utilize the Qt Cryptographic Architecture (QCA).
 #------------------------------------------------------------------------------
 
 %package plugin-nss
-Summary:	Logger plugin for QCA
+Summary:	NSS plugin for QCA
 Group:		Development/KDE and Qt
 Provides:	qca2-qt5-plugin-nss-%{_lib} = %{EVRD}
 
@@ -180,7 +180,7 @@ utilize the Qt Cryptographic Architecture (QCA).
 #------------------------------------------------------------------------------
 
 %package plugin-softstore
-Summary:	Logger plugin for QCA
+Summary:	Softstore plugin for QCA
 Group:		Development/KDE and Qt
 Provides:	qca2-qt5-plugin-softstore-%{_lib} = %{EVRD}
 
