@@ -1,5 +1,3 @@
-%define git 20141006
-
 %define qtcryptodir %{_qt5_plugindir}/crypto
 
 %define oname qca
@@ -10,12 +8,11 @@
 Summary:	Straightforward and cross-platform crypto API for Qt5
 Name:		qca2-qt5
 Version:	2.1.0
-Release:	0.%{git}.1
+Release:	1
 License:	LGPLv2.1+
 Group:		System/Libraries
 Url:		http://delta.affinix.com/qca
-# From KDE git
-Source0:	%{oname}-%{git}.tar.bz2
+Source0:	http://delta.affinix.com/download/qca/2.0/%{oname}-%{version}.tar.gz
 BuildRequires:	cmake
 BuildRequires:	rootcerts
 BuildRequires:	qmake5
@@ -194,7 +191,7 @@ utilize the Qt Cryptographic Architecture (QCA).
 #------------------------------------------------------------------------------
 
 %prep
-%setup -qn %{oname}
+%setup -qn %{oname}-%{version}
 
 %build
 %cmake_qt5 \
