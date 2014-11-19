@@ -1,3 +1,5 @@
+%bcond_without docs
+
 %define qtcryptodir %{_qt5_plugindir}/crypto
 
 %define oname qca
@@ -14,12 +16,16 @@ Group:		System/Libraries
 Url:		http://delta.affinix.com/qca
 Source0:	http://delta.affinix.com/download/qca/2.0/%{oname}-%{version}.tar.gz
 BuildRequires:	cmake
+%if %{with docs}
+BuildRequires:	doxygen
+%endif
 BuildRequires:	rootcerts
 BuildRequires:	qmake5
 BuildRequires:	sasl-devel
 BuildRequires:	pkgconfig(libgcrypt)
 BuildRequires:	pkgconfig(nss)
 BuildRequires:	pkgconfig(Qt5Core)
+BuildRequires:	pkgconfig(Qt5Network)
 
 %description
 The QCA library provides an easy API for a range of cryptographic
@@ -65,6 +71,9 @@ Provides:	%{name}-devel = %{EVRD}
 Development files for QCA.
 
 %files -n %{devname}
+%if %{with docs}
+%doc build/apidocs
+%endif
 %{_qt5_libdir}/cmake/Qca/*.cmake
 %{_qt5_libdir}/pkgconfig/qca2-qt5.pc
 %{_qt5_libdir}/qt5/mkspecs/features/crypto.prf
@@ -107,6 +116,7 @@ utilize the Qt Cryptographic Architecture (QCA).
 Summary:	GnuPG plugin for QCA
 Group:		Development/KDE and Qt
 Provides:	qca2-qt5-plugin-gnupg-%{_lib} = %{EVRD}
+Requires:	gnupg
 
 %description plugin-gnupg
 This is a plugin to provide GnuPG capability to programs that
@@ -201,7 +211,9 @@ utilize the Qt Cryptographic Architecture (QCA).
 	-DBUILD_TESTS:BOOL=OFF \
 	-DWITH_botan_PLUGIN=OFF
 %make
-
+%if %{with docs}
+%make doc
+%endif
 
 %install
 %makeinstall_std -C build
