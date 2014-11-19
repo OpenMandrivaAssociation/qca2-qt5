@@ -204,8 +204,9 @@ utilize the Qt Cryptographic Architecture (QCA).
 %setup -qn %{oname}-%{version}
 
 %build
+# Unset CMAKE_INSTALL_PREFIX to use QCA_INSTALL_IN_QT_PREFIX (see CMakeLists.txt)
 %cmake_qt5 \
-	-DQCA_INSTALL_IN_QT_PREFIX:BOOL=ON \
+	-DCMAKE_INSTALL_PREFIX="" \
 	-DQCA_SUFFIX=qt5 \
 	-DQT4_BUILD:BOOL=OFF \
 	-DBUILD_TESTS:BOOL=OFF \
