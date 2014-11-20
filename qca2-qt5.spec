@@ -10,7 +10,7 @@
 Summary:	Straightforward and cross-platform crypto API for Qt5
 Name:		qca2-qt5
 Version:	2.1.0
-Release:	1
+Release:	2
 License:	LGPLv2.1+
 Group:		System/Libraries
 Url:		http://delta.affinix.com/qca
@@ -207,6 +207,7 @@ utilize the Qt Cryptographic Architecture (QCA).
 # Unset CMAKE_INSTALL_PREFIX to use QCA_INSTALL_IN_QT_PREFIX (see CMakeLists.txt)
 %cmake_qt5 \
 	-DCMAKE_INSTALL_PREFIX="" \
+	-DQCA_MAN_INSTALL_DIR=%{_mandir} \
 	-DQCA_SUFFIX=qt5 \
 	-DQT4_BUILD:BOOL=OFF \
 	-DBUILD_TESTS:BOOL=OFF \
@@ -220,8 +221,5 @@ utilize the Qt Cryptographic Architecture (QCA).
 %makeinstall_std -C build
 
 # Make directory for plugins
-install -d -m 755 %{buildroot}/%{qtcryptodir}
-
-mkdir -p %{buildroot}%{_mandir}
-mv %{buildroot}%{_qt5_datadir}/man/man1 %{buildroot}%{_mandir}
+install -d -m 755 %{buildroot}%{qtcryptodir}
 
