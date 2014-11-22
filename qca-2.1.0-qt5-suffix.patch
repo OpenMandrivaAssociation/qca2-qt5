@@ -1,0 +1,37 @@
+From: Ivan Romanov <drizt@land.ru>
+Date: Sat, 22 Nov 2014 01:10:04 +0000
+Subject: cmake: warn user when QCA_SUFFIX is not set
+X-Git-Url: http://quickgit.kde.org/?p=qca.git&a=commitdiff&h=2c58be171e8478f03d8a724640f40e36826c6893
+---
+cmake: warn user when QCA_SUFFIX is not set
+
+Many linux distribution provides both version of Qt: Qt4 and Qt5.
+These versions are binary is incompatible and any qt-based library
+compiled against such Qt versions will be binary incompatible with
+one another. In common case library name must not be related with
+based libraries. In our case Linux users want to have both versions
+QCA installed in their system. I will do not implicity rename Qt5
+based QCA but just warn user and allow him explicity set QCA_SUFFIX.
+---
+
+
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -435,6 +435,16 @@
+   endif()
+   message("")
+ 
++  if(UNIX AND NOT APPLE)
++    if(NOT QCA_SUFFIX AND NOT QT4_BUILD)
++
++      message("${ESCAPE}[31mYou don't have QCA_SUFFIX set. Please note that the recommended way of")
++      message("building Qt5 version of qca for Linux distributions is to set")
++      message("QCA_SUFFIX to qt5 (-DQCA_SUFFIX=qt5).")
++      message("${ESCAPE}[0m")
++    endif()
++  endif()
++
+   install(EXPORT QCATargets DESTINATION ${QCA_LIBRARY_INSTALL_DIR}/cmake/Qca FILE QcaTargets.cmake)
+   install(FILES
+     "${CMAKE_CURRENT_BINARY_DIR}/lib/cmake/Qca/QcaConfig.cmake"
+

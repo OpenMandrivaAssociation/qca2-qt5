@@ -10,11 +10,14 @@
 Summary:	Straightforward and cross-platform crypto API for Qt5
 Name:		qca2-qt5
 Version:	2.1.0
-Release:	2
+Release:	3
 License:	LGPLv2.1+
 Group:		System/Libraries
 Url:		http://delta.affinix.com/qca
 Source0:	http://delta.affinix.com/download/qca/2.0/%{oname}-%{version}.tar.gz
+# Backported from upstream
+Patch0:		qca-2.1.0-qt5-suffix.patch
+Patch1:		qca-2.1.0-cmake-suffix.patch
 BuildRequires:	cmake
 %if %{with docs}
 BuildRequires:	doxygen
@@ -202,6 +205,8 @@ utilize the Qt Cryptographic Architecture (QCA).
 
 %prep
 %setup -qn %{oname}-%{version}
+%patch0 -p1
+%patch1 -p1
 
 %build
 # Unset CMAKE_INSTALL_PREFIX to use QCA_INSTALL_IN_QT_PREFIX (see CMakeLists.txt)

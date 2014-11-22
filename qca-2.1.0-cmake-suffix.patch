@@ -1,0 +1,48 @@
+From: Ivan Romanov <drizt@land.ru>
+Date: Sat, 22 Nov 2014 01:30:07 +0000
+Subject: cmake: apply QCA_SUFFIX for cmake config module names
+X-Git-Url: http://quickgit.kde.org/?p=qca.git&a=commitdiff&h=66447d0454591f4c1deb5f4c988c6027194b1335
+---
+cmake: apply QCA_SUFFIX for cmake config module names
+---
+
+
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -371,13 +371,19 @@
+     COMMENT "Generating API documentation with Doxygen" VERBATIM)
+ endif(DOXYGEN_FOUND)
+ 
++if(NOT QCA_SUFFIX)
++  set(QCA_CONFIG_NAME_BASE "Qca")
++else()
++  set(QCA_CONFIG_NAME_BASE "Qca-${QCA_SUFFIX}")
++endif()
++
+ include(CMakePackageConfigHelpers)
+ configure_package_config_file(
+   "${CMAKE_CURRENT_SOURCE_DIR}/QcaConfig.cmake.in"
+-  "${CMAKE_CURRENT_BINARY_DIR}/lib/cmake/Qca/QcaConfig.cmake"
++  "${CMAKE_CURRENT_BINARY_DIR}/lib/cmake/Qca/${QCA_CONFIG_NAME_BASE}Config.cmake"
+   INSTALL_DESTINATION ${QCA_LIBRARY_INSTALL_DIR}/cmake/Qca
+ )
+-write_basic_config_version_file("${CMAKE_CURRENT_BINARY_DIR}/lib/cmake/Qca/QcaConfigVersion.cmake" VERSION ${QCA_LIB_VERSION_STRING} COMPATIBILITY AnyNewerVersion)
++write_basic_config_version_file("${CMAKE_CURRENT_BINARY_DIR}/lib/cmake/Qca/${QCA_CONFIG_NAME_BASE}ConfigVersion.cmake" VERSION ${QCA_LIB_VERSION_STRING} COMPATIBILITY AnyNewerVersion)
+ 
+ if(NOT DEVELOPER_MODE)
+ 
+@@ -445,10 +451,10 @@
+     endif()
+   endif()
+ 
+-  install(EXPORT QCATargets DESTINATION ${QCA_LIBRARY_INSTALL_DIR}/cmake/Qca FILE QcaTargets.cmake)
++  install(EXPORT QCATargets DESTINATION ${QCA_LIBRARY_INSTALL_DIR}/cmake/Qca FILE ${QCA_CONFIG_NAME_BASE}Targets.cmake)
+   install(FILES
+-    "${CMAKE_CURRENT_BINARY_DIR}/lib/cmake/Qca/QcaConfig.cmake"
+-    "${CMAKE_CURRENT_BINARY_DIR}/lib/cmake/Qca/QcaConfigVersion.cmake"
++    "${CMAKE_CURRENT_BINARY_DIR}/lib/cmake/Qca/${QCA_CONFIG_NAME_BASE}Config.cmake"
++    "${CMAKE_CURRENT_BINARY_DIR}/lib/cmake/Qca/${QCA_CONFIG_NAME_BASE}ConfigVersion.cmake"
+     DESTINATION ${QCA_LIBRARY_INSTALL_DIR}/cmake/Qca
+     )
+ endif()
+
