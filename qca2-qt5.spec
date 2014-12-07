@@ -10,7 +10,7 @@
 Summary:	Straightforward and cross-platform crypto API for Qt5
 Name:		qca2-qt5
 Version:	2.1.0
-Release:	3
+Release:	4
 License:	LGPLv2.1+
 Group:		System/Libraries
 Url:		http://delta.affinix.com/qca
