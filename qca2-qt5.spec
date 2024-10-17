@@ -13,7 +13,7 @@ Version:	2.1.0.3
 Release:	1
 License:	LGPLv2.1+
 Group:		System/Libraries
-Url:		http://delta.affinix.com/qca
+Url:		https://delta.affinix.com/qca
 Source0:	http://delta.affinix.com/download/qca/2.0/%{oname}-%{version}.tar.gz
 # Backported from upstream
 Patch0:		qca-2.1.0-qt5-suffix.patch
